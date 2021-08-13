@@ -615,3 +615,8 @@ footer h4 {
     transition: 1s;
   }
 }
+
+.unaval {
+  text-align: centre;
+  margin: 15px auto;
+}
