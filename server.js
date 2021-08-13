@@ -16,7 +16,7 @@ const { sendEmail } = require("./mail-sender");
 
 const jsonParser = bodyParser.json();
 const PRODUCTION = process.env.NODE_HTTPS;
-const STATIC_PATH = process.env.STATIC_PATH;
+// const STATIC_PATH = process.env.STATIC_PATH;
 
 const cerfPathes = {
   cert: "",
@@ -63,26 +63,27 @@ app.use(redirectToHTTPS([/localhost:(\d{4})/], [], 301));
 
 const expressStaticGzip = require("express-static-gzip");
 
-app.use(
-  "/",
-  expressStaticGzip(STATIC_PATH, {
-    enableBrotli: true,
-    customCompressions: [
-      {
-        encodingName: "deflate",
-        fileExtension: "qz",
-      },
-    ],
-    orderPreference: ["br"],
-  })
-);
-app.use(express.static(STATIC_PATH));
+// app.use(
+//   "/",
+//   expressStaticGzip(STATIC_PATH, {
+//     enableBrotli: true,
+//     customCompressions: [
+//       {
+//         encodingName: "deflate",
+//         fileExtension: "qz",
+//       },
+//     ],
+//     orderPreference: ["br"],
+//   })
+// );
+//app.use(express.static(STATIC_PATH));
 app.use("/public", express.static(__dirname + "/public"));
 app.use(cookieParser());
 
 app.get("*", (req, res) => {
-  const htmlPath = path.join(STATIC_PATH, "index.html");
-  res.sendFile(htmlPath);
+  res.send('hello');
+  // const htmlPath = path.join(STATIC_PATH, "index.html");
+  // res.sendFile(htmlPath);
 });
 
 app.post("/api/send-mail", jsonParser, async (req, response) => {
@@ -97,21 +98,21 @@ app.post("/api/send-mail", jsonParser, async (req, response) => {
   return response.status(400).json({ message: "error" });
 });
 
-if (PRODUCTION) {
-  const httpServer = http.createServer(app);
+// if (PRODUCTION) {
+//   const httpServer = http.createServer(app);
 
-  const httpsServer = https.createServer(
-    {
-      cert: cerfPathes.cert,
-      key: cerfPathes.key,
-    },
-    app
-  );
+//   const httpsServer = https.createServer(
+//     {
+//       cert: cerfPathes.cert,
+//       key: cerfPathes.key,
+//     },
+//     app
+//   );
 
-  httpServer.listen(80, () => console.log("HTTP started on port 80"));
-  httpsServer.listen(443, () => console.log("HTTPS started on port 443"));
-} else {
+//   httpServer.listen(80, () => console.log("HTTP started on port 80"));
+//   httpsServer.listen(443, () => console.log("HTTPS started on port 443"));
+// } else {
   const httpServer = http.createServer(app);
 
   httpServer.listen(8080, () => console.log("HTTP started on port 8080"));
-}
+//}
