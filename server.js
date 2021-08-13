@@ -1,5 +1,5 @@
 // require("dotenv").config({ path: __dirname + "/.env" });
-
+console.log(1)
 // const cors = require("cors");
 // const express = require("express");
 // const bodyParser = require("body-parser");
@@ -118,16 +118,16 @@
 // //}
 
 
-const express = require('express')
-const app = express()
-const port = 3000
+// const express = require('express')
+// const app = express()
+// const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`)
+// })
 
 

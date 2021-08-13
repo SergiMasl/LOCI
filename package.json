@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev:server": "nodemon --max_old_space_size=2048 server.js",
+    "dev:server": "node --max_old_space_size=2048 server.js",
     "prod:server": "NODE_HTTPS=true node --max_old_space_size=2048 server.js",
     "prod:deploy": "NODE_HTTPS=true pm2 start server.js -- --max_old_space_size=2048"
   },
