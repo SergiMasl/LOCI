@@ -42,7 +42,7 @@ const validState = {
   email: false,
   fName: false,
   lName: false,
-  text: false,
+  // text: false,
 };
 
 const openForm = () => {
@@ -168,7 +168,7 @@ function submit(event) {
 
   validPhone();
   validMail();
-  validText();
+  // validText();
   validFname();
   validLname();
 
@@ -184,8 +184,13 @@ function submit(event) {
     inputText: inputText.value,
   };
 
+
+  const apiUrl = location.protocol  + '//' + location.hostname + ':3000/api/send-mail';
+
+  console.log(apiUrl)
+
   if (isValid === true) {
-    fetch("/api/send-mail", {
+    fetch(apiUrl, {
       method: "POST",
       body: JSON.stringify(client),
       headers: {
